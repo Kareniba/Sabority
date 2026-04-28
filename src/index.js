@@ -7,6 +7,7 @@ const categoryRoutes = require('./routes/categoryRoutes');
 const recipeRoutes = require('./routes/recipeRoutes');
 const userRoutes = require('./routes/userRoutes');
 const favoriteRoutes = require('./routes/favoriteRoutes');
+const { errorHandler } = require('./middleware/errorHandler');
 
 dotenv.config();
 connectDB();
@@ -25,6 +26,8 @@ app.use('/api/categorias', categoryRoutes);
 app.use('/api/recetas', recipeRoutes);
 app.use('/api/usuarios', userRoutes);
 app.use('/api/favoritos', favoriteRoutes);
+
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
