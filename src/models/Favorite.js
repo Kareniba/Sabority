@@ -1,16 +1,16 @@
 const mongoose = require('mongoose');
 
-const categorySchema = new mongoose.Schema({
-  nombre: {
-    type: String,
-    required: true,
-    trim: true,
-    unique: true
+const favoriteSchema = new mongoose.Schema({
+  usuario: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User',
+    required: true
   },
-  descripcion: {
-    type: String,
-    default: ''
+  receta: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Recipe',
+    required: true
   }
 }, { timestamps: true });
 
-module.exports = mongoose.model('Category', categorySchema);
+module.exports = mongoose.model('Favorite', favoriteSchema);
