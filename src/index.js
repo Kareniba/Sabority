@@ -6,6 +6,7 @@ const authRoutes = require('./routes/authRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const recipeRoutes = require('./routes/recipeRoutes');
 const userRoutes = require('./routes/userRoutes');
+const favoriteRoutes = require('./routes/favoriteRoutes');
 
 dotenv.config();
 connectDB();
@@ -23,6 +24,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/categorias', categoryRoutes);
 app.use('/api/recetas', recipeRoutes);
 app.use('/api/usuarios', userRoutes);
+app.use('/api/favoritos', favoriteRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
