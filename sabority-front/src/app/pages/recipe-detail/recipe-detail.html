@@ -1,0 +1,36 @@
+<div class="detail-container" *ngIf="!cargando && receta">
+  <div class="detail-header">
+    <img *ngIf="receta.imagen" [src]="receta.imagen" [alt]="receta.titulo" class="detail-img" />
+    <div *ngIf="!receta.imagen" class="detail-img-placeholder">🍽️</div>
+    <div class="detail-header-info">
+      <h1>{{ receta.titulo }}</h1>
+      <p class="detail-desc">{{ receta.descripcion }}</p>
+      <div class="detail-meta">
+        <span>⏱️ {{ receta.tiempoPreparacion }} min</span>
+        <span *ngIf="receta.categoria">🏷️ {{ receta.categoria.nombre }}</span>
+        <span *ngIf="receta.autor">👨‍🍳 {{ receta.autor.nombre }}</span>
+      </div>
+      <div class="detail-actions">
+        <button *ngIf="auth.isLoggedIn()" (click)="agregarFavorito()" class="btn-favorito">❤️ Favorito</button>
+        <a *ngIf="auth.isLoggedIn()" [routerLink]="['/recipes/edit', receta._id]" class="btn-edit">✏️ Editar</a>
+        <a routerLink="/recipes" class="btn-back">← Volver</a>
+      </div>
+      <p *ngIf="mensaje" class="mensaje">{{ mensaje }}</p>
+    </div>
+  </div>
+
+  <div class="detail-body">
+    <div class="detail-section">
+      <h2>🥘 Ingredientes</h2>
+      <ul class="ingredientes-list">
+        <li *ngFor="let ing of receta.ingredientes">{{ ing }}</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h2>📋 Instrucciones</h2>
+      <p class="instrucciones">{{ receta.instrucciones }}</p>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="cargando" class="loading">Cargando receta...</div>

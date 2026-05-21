@@ -1,0 +1,28 @@
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-logo">🍽️</div>
+    <h2>Crear cuenta</h2>
+    <p class="auth-subtitle">Únete a la comunidad Sabority</p>
+
+    <div class="error-msg" *ngIf="error">{{ error }}</div>
+    <div class="exito-msg" *ngIf="exito">{{ exito }}</div>
+
+    <form (ngSubmit)="register()">
+      <div class="form-group">
+        <label>Nombre</label>
+        <input type="text" [(ngModel)]="datos.nombre" name="nombre" placeholder="Tu nombre" required />
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" [(ngModel)]="datos.email" name="email" placeholder="tu@email.com" required />
+      </div>
+      <div class="form-group">
+        <label>Contraseña</label>
+        <input type="password" [(ngModel)]="datos.password" name="password" placeholder="••••••••" required />
+      </div>
+      <button type="submit" class="btn-primary">Registrarse</button>
+    </form>
+
+    <p class="auth-footer">¿Ya tienes cuenta? <a routerLink="/login">Inicia sesión</a></p>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+.navbar-links a.active {
+  color: var(--primary) !important;
+  font-weight: 600;
+}

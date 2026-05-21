@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/">🍽️ Sabority</a>
+  </div>
+  <div class="navbar-links">
+    <a routerLink="/">Inicio</a>
+    <a routerLink="/recipes">Recetas</a>
+    <ng-container *ngIf="auth.isLoggedIn()">
+      <a routerLink="/recipes/new">Nueva Receta</a>
+      <a href="#" (click)="logout()">Cerrar sesión</a>
+    </ng-container>
+    <ng-container *ngIf="!auth.isLoggedIn()">
+      <a routerLink="/login">Iniciar sesión</a>
+      <a routerLink="/register" class="btn-register">Registrarse</a>
+    </ng-container>
+  </div>
+</nav>

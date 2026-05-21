@@ -1,0 +1,39 @@
+<div class="recipes-container">
+  <div class="recipes-header">
+    <h1>🍳 Recetas</h1>
+    <div class="recipes-actions">
+      <input type="text" [(ngModel)]="busqueda" (input)="filtrar()" placeholder="Buscar receta..." class="search-input" />
+      <a *ngIf="auth.isLoggedIn()" routerLink="/recipes/new" class="btn-primary">+ Nueva Receta</a>
+    </div>
+  </div>
+
+  <div *ngIf="cargando" class="loading">Cargando recetas...</div>
+
+  <div *ngIf="!cargando && filtradas.length === 0" class="empty">
+    No hay recetas disponibles aún.
+  </div>
+
+  <div class="recipes-grid" *ngIf="!cargando">
+    <div class="recipe-card" *ngFor="let receta of filtradas">
+      <div class="recipe-img">
+        <img *ngIf="receta.imagen" [src]="receta.imagen" [alt]="receta.titulo" />
+        <div *ngIf="!receta.imagen" class="recipe-img-placeholder">🍽️</div>
+      </div>
+      <div class="recipe-info">
+        <h3>{{ receta.titulo }}</h3>
+        <p class="recipe-desc">{{ receta.descripcion }}</p>
+        <div class="recipe-meta">
+          <span>⏱️ {{ receta.tiempoPreparacion }} min</span>
+          <span *ngIf="receta.categoria">🏷️ {{ receta.categoria.nombre }}</span>
+        </div>
+        <div class="recipe-footer">
+          <a [routerLink]="['/recipes', receta._id]" class="btn-ver">Ver receta</a>
+          <div *ngIf="auth.isLoggedIn()" class="recipe-btns">
+            <a [routerLink]="['/recipes/edit', receta._id]" class="btn-edit">✏️</a>
+            <button (click)="eliminar(receta._id)" class="btn-delete">🗑️</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

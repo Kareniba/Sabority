@@ -1,0 +1,58 @@
+<div class="form-container">
+  <h1>{{ editando ? '✏️ Editar Receta' : '🍳 Nueva Receta' }}</h1>
+
+  <div class="error-msg" *ngIf="error">{{ error }}</div>
+
+  <form (ngSubmit)="guardar()">
+    <div class="form-group">
+      <label>Título</label>
+      <input type="text" [(ngModel)]="datos.titulo" name="titulo" placeholder="Nombre de la receta" required />
+    </div>
+
+    <div class="form-group">
+      <label>Descripción</label>
+      <textarea [(ngModel)]="datos.descripcion" name="descripcion" placeholder="Describe tu receta..." rows="3" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Ingredientes</label>
+      <div class="ingrediente-input">
+        <input type="text" [(ngModel)]="ingredienteInput" name="ingredienteInput" placeholder="Ej: 2 tazas de harina" />
+        <button type="button" (click)="agregarIngrediente()" class="btn-add">+ Agregar</button>
+      </div>
+      <ul class="ingredientes-lista">
+        <li *ngFor="let ing of datos.ingredientes; let i = index">
+          {{ ing }} <button type="button" (click)="quitarIngrediente(i)" class="btn-remove">✕</button>
+        </li>
+      </ul>
+    </div>
+
+    <div class="form-group">
+      <label>Instrucciones</label>
+      <textarea [(ngModel)]="datos.instrucciones" name="instrucciones" placeholder="Paso a paso..." rows="5" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Tiempo de preparación (minutos)</label>
+      <input type="number" [(ngModel)]="datos.tiempoPreparacion" name="tiempoPreparacion" min="1" required />
+    </div>
+
+    <div class="form-group">
+      <label>Categoría</label>
+      <select [(ngModel)]="datos.categoria" name="categoria" required>
+        <option value="">Selecciona una categoría</option>
+        <option *ngFor="let cat of categorias" [value]="cat._id">{{ cat.nombre }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>URL de imagen (opcional)</label>
+      <input type="text" [(ngModel)]="datos.imagen" name="imagen" placeholder="https://..." />
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="btn-primary">{{ editando ? 'Actualizar' : 'Crear Receta' }}</button>
+      <a routerLink="/recipes" class="btn-cancel">Cancelar</a>
+    </div>
+  </form>
+</div>

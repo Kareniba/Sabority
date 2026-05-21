@@ -1,0 +1,30 @@
+<div class="home-hero">
+  <div class="hero-content">
+    <h1>🍽️ Sabority</h1>
+    <p>Descubre, comparte y guarda tus recetas favoritas</p>
+    <a routerLink="/recipes" class="btn-primary">Explorar Recetas</a>
+  </div>
+</div>
+
+<div class="home-section">
+  <h2>✨ Recetas Recientes</h2>
+  <div class="recipes-grid">
+    <div class="recipe-card" *ngFor="let receta of recetas">
+      <div class="recipe-img">
+        <img *ngIf="receta.imagen" [src]="receta.imagen" [alt]="receta.titulo" />
+        <div *ngIf="!receta.imagen" class="recipe-img-placeholder">🍽️</div>
+      </div>
+      <div class="recipe-info">
+        <h3>{{ receta.titulo }}</h3>
+        <p>{{ receta.descripcion }}</p>
+        <div class="recipe-meta">
+          <span>⏱️ {{ receta.tiempoPreparacion }} min</span>
+        </div>
+        <a [routerLink]="['/recipes', receta._id]" class="btn-ver">Ver receta</a>
+      </div>
+    </div>
+  </div>
+  <div class="home-cta">
+    <a routerLink="/recipes" class="btn-secondary">Ver todas las recetas →</a>
+  </div>
+</div>
